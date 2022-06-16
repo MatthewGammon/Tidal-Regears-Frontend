@@ -25,6 +25,7 @@ export default function OffHand() {
             <div className="offHands">
                 <label htmlFor="offHand-select">OffHand:</label>
                 <select name="offHand" id="offHand-select">
+                    <option defaultValue="null">None</option>
                     {
                         offHands?.map((offHand, id) => (
                             <option value={offHand.offHandName} key={offHand.offHandId}>{offHand.offHandName}</option>
