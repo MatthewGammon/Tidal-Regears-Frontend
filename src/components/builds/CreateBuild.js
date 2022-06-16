@@ -7,6 +7,10 @@ import Capes from '../accessories/Capes';
 import MainHand from '../weapons/MainHand';
 import OffHand from '../weapons/OffHand';
 
+import Food from '../consumables/food/Food';
+import Potion from '../consumables/potions/Potions';
+import Mounts from '../mounts/Mounts';
+
 export default function CreateBuild() {
 
     return (
@@ -32,7 +36,19 @@ export default function CreateBuild() {
             </div>
 
             <div className="capes-dropdown">
-                <Capes />
+                <Capes/>
+            </div>
+
+            <div className="food-dropdown">
+                <Food/>
+            </div>
+
+            <div className="potions-dropdown">
+                <Potion/>
+            </div>
+
+            <div className="mounts-dropdown">
+                <Mounts/>
             </div>
         </div>
 
