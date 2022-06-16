@@ -1,13 +1,12 @@
 import './App.css';
+import CreateBuild from '../src/components/builds/CreateBuild';
 
 function App() {
-  return (
-    <div className="App">
-      <div className="lol">
-        <h1>This is a test!</h1>
-      </div>
-    </div>
-  );
+    return (
+        <div className="App">
+            <CreateBuild />
+        </div>
+    );
 }
 
 export default App;
