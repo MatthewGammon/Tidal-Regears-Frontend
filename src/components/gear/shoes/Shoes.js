@@ -23,7 +23,7 @@ export default function Shoes() {
     return (
         <>
             <div className="shoes">
-                <label htmlFor="shoes-select">Shoes</label>
+                <label htmlFor="shoes-select">Shoes:</label>
                 <select name="shoes" id="shoes-select">
                     {
                         shoes?.map((shoe, id) => (
