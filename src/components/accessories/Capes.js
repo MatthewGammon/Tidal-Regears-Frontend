@@ -23,7 +23,7 @@ export default function Capes(){
     return (
         <>
             <div className="capes">
-                <label htmlFor="capes-select">Cape</label>
+                <label htmlFor="capes-select">Cape:</label>
                 <select name="capes" id="capes-select">
                     {
                         capes?.map((cape, id) => (
