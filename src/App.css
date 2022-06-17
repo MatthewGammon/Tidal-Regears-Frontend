@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+.app {
+    overflow: hidden;
+    display: block;
+    position: relative;
+    background-color: #023753;
+    padding-bottom: 5em;
+}
