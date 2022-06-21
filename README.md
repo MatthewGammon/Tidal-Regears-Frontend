@@ -1,4 +1,5 @@
 # Tidal Regear Management System
+This is only the front-end repository, the backend repository will be available as a link here when it is available.
 
 ## About
 This project will allow guild officers to manage the guild's regear system.
