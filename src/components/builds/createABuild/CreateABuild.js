@@ -1,0 +1,278 @@
+import React, {useState, useEffect} from 'react';
+import {useParams, useNavigate} from "react-router-dom";
+import {baseUrl, createBuild, readBuild, updateBuild} from '../../../utils/api';
+import './CreateABuild.css';
+
+export default function CreateABuild() {
+    const [headGear, setHeadGear] = useState(null);
+    const [chestGear, setChestGear] = useState(null);
+    const [shoes, setShoes] = useState(null);
+    const [mainHand, setMainHand] = useState(null);
+    const [offHand, setOffHand] = useState(null);
+    const [capes, setCapes] = useState(null);
+    const [food, setFood] = useState(null);
+    const [potions, setPotions] = useState(null);
+    const [mounts, setMounts] = useState(null);
+    const [fetchError, setFetchError] = useState(null);
+    const [buildError, setBuildError] = useState(null);
+    const [build, setBuild] = useState({
+        buildName: '',
+        buildRole: '',
+        minimumIp: '',
+        minimumTier: '',
+        headGear: '',
+        chestGear: '',
+        shoes: '',
+        mainHand: '',
+        offHand: '',
+        cape: '',
+        food: '',
+        potion: '',
+        mount: '',
+    })
+
+    const navigate = useNavigate();
+    const params = useParams();
+    const buildId = params.buildId;
+
+
+    useEffect(() => {
+        const loadMenus = async () => {
+            setFetchError(null);
+            try {
+                const response = await Promise.all([
+                    fetch(`${baseUrl}/headGear`),
+                    fetch(`${baseUrl}/chestGear`),
+                    fetch(`${baseUrl}/shoes`),
+                    fetch(`${baseUrl}/mainHand`),
+                    fetch(`${baseUrl}/offHand`),
+                    fetch(`${baseUrl}/capes`),
+                    fetch(`${baseUrl}/food`),
+                    fetch(`${baseUrl}/potions`),
+                    fetch(`${baseUrl}/mounts`)]
+                );
+                const data = await Promise.all(response.map((res) => res.json()));
+                setHeadGear(data[0]);
+                setChestGear(data[1]);
+                setShoes(data[2]);
+                setMainHand(data[3]);
+                setOffHand(data[4]);
+                setCapes(data[5]);
+                setFood(data[6]);
+                setPotions(data[7]);
+                setMounts(data[8]);
+            } catch (error) {
+                setFetchError(error);
+            }
+        }
+        loadMenus();
+    }, []);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setBuildError(null);
+        try {
+            if (buildId) {
+                await updateBuild(build);
+                navigate("/home");
+            } else {
+                console.log("I am here")
+                await createBuild(build);
+                navigate("/home");
+                console.log("but I am not here")
+            }
+        } catch (error) {
+            console.log("I caught something!")
+            console.log(error.message);
+            setBuild(error);
+        }
+    }
+
+    const handleChange = async ({target: {name, value}}) => {
+        setBuild((previousBuild) => ({
+            ...previousBuild,
+            [name]: value,
+        }));
+    }
+
+
+    return (
+        <main className="create-a-build">
+            <div className="build-header">
+                <h2>Create a New Build</h2>
+            </div>
+            <form className="build-form" onSubmit={handleSubmit}>
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Build Info</legend>
+
+                    <label htmlFor="build-name">Build Name:</label>
+                    <input type="text" id="build-name" name="buildName" value={build.build_name}
+                           onChange={handleChange}
+                           required
+                    />
+
+                    <label htmlFor="build-role">Build Role:</label>
+                    <select name="buildRole" id="build-role" onChange={handleChange} required>
+                        <option value="">-- Select A Role --</option>
+                        <option value="Tank">Tank</option>
+                        <option value="Support">Support</option>
+                        <option value="Healer">Healer</option>
+                        <option value="MeleeDPS">Melee DPS</option>
+                        <option value="RangedDPS">Ranged DPS</option>
+                    </select>
+
+                    <label htmlFor="min-tier">Minimum Tier Equivalent:</label>
+                    <input name="minimumTier" type="number" id="min-tier" min="6" max="10" placeholder={8}
+                           onChange={handleChange}
+                           required
+                    />
+
+                    <label htmlFor="minimum-ip">Minimum IP:</label>
+                    <input name="minimumIp" type="number" id="minimum-ip" min="1200" max="1950" step="50"
+                           placeholder={1350}
+                           onChange={handleChange}
+                           required
+                    />
+                </fieldset>
+
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Armor</legend>
+                    <div className="head-gear">
+                        <label htmlFor="head-gear-select">Head Gear:</label>
+                        <select
+                            name="headGear"
+                            id="head-gear-select"
+                            onChange={handleChange}
+                            required>
+                            <option value="">-- Select Head Gear --</option>
+                            {
+                                headGear?.map((headGear, id) => (
+                                    <option value={headGear.headName} key={headGear.headId}>{headGear.headName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
+                    <div className="chest-gear">
+                        <label htmlFor="chestGear-select">Chest Gear:</label>
+                        <select
+                            name="chestGear"
+                            id="chestGear-select"
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="">-- Select Chest Gear --</option>
+                            {
+                                chestGear?.map((chestGear, id) => (
+                                    <option value={chestGear.chestName}
+                                            key={chestGear.chestId}>{chestGear.chestName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
+                    <div className="shoes">
+                        <label htmlFor="shoes-select">Shoes:</label>
+                        <select name="shoes" id="shoes-select"
+                                onChange={handleChange}
+                                required>
+                            <option value="">-- Select Shoes --</option>
+                            {
+                                shoes?.map((shoe, id) => (
+                                    <option value={shoe.shoeName} key={shoe.shoeId}>{shoe.shoeName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Weapons</legend>
+                    <div className="mainHands">
+                        <label htmlFor="mainHand-select">Main Hand:</label>
+                        <select name="mainHand" id="mainHand-select" onChange={handleChange} required>
+                            <option value="">-- Select Main Hand --</option>
+                            {
+                                mainHand?.map((mainHand, id) => (
+                                    <option value={mainHand.main_hand_id}
+                                            key={mainHand.mainHandId}>{mainHand.mainHandName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
+                    <div className="offHands">
+                        <label htmlFor="offHand-select">Off Hand:</label>
+                        <select name="offHand" id="offHand-select" onChange={handleChange} required>
+                            <option value="">-- Select Off Hand --</option>
+                            <option value="null">None</option>
+                            {
+                                offHand?.map((offHand, id) => (
+                                    <option value={offHand.offHandName}
+                                            key={offHand.offHandId}>{offHand.offHandName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Accessories</legend>
+                    <div className="capes">
+                        <label htmlFor="capes-select">Cape:</label>
+                        <select name="cape" id="capes-select" onChange={handleChange} required>
+                            <option value="">-- Select Cape --</option>
+                            {
+                                capes?.map((cape, id) => (
+                                    <option value={cape.capeName} key={cape.capeId}>{cape.capeName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Consumables</legend>
+                    <div className="food">
+                        <label htmlFor="food-select">Food:</label>
+                        <select name="food" id="food-select" onChange={handleChange} required>
+                            <option value="">-- Select Food --</option>
+                            {
+                                food?.map((food, id) => (
+                                    <option value={food.foodName} key={food.foodId}>{food.foodName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+
+                    <div className="potions">
+                        <label htmlFor="potions-select">Potion:</label>
+                        <select name="potion" id="potions-select" onChange={handleChange} required>
+                            <option value="">-- Select Potion --</option>
+                            {
+                                potions?.map((potion, id) => (
+                                    <option value={potion.potionName} key={potion.potionId}>{potion.potionName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset className="create-build-fieldset">
+                    <legend className="create-build-legend">Mounts</legend>
+                    <div className="mounts">
+                        <label htmlFor="mounts-select">Mount:</label>
+                        <select name="mount" id="mounts-select" onChange={handleChange} required>
+                            <option value="">-- Select Mount --</option>
+                            {
+                                mounts?.map((mount, id) => (
+                                    <option value={mount.mountName} key={mount.mountId}>{mount.mountName}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </fieldset>
+                <button className="build-submit-button" type="submit">Submit Build</button>
+            </form>
+        </main>
+
+    )
+
+
+}
