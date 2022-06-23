@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
-import {baseUrl, createBuild, readBuild, updateBuild} from '../../../utils/api';
+import {baseUrl, createBuild, updateBuild} from '../../../utils/buildsService';
 import './CreateABuild.css';
 
 export default function CreateABuild() {
@@ -79,7 +79,7 @@ export default function CreateABuild() {
             } else {
                 await createBuild(build);
                 window.alert("Build successfully created!")
-                navigate("/home");
+                navigate("/builds");
 
             }
         } catch (error) {
@@ -99,7 +99,7 @@ export default function CreateABuild() {
 
     return (
         <main className="create-a-build">
-            <div className="build-header">
+            <div className="create-build-header">
                 <h2>Create a New Build</h2>
             </div>
             <form className="build-form" onSubmit={handleSubmit}>

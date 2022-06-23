@@ -1,37 +1,13 @@
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const headers = new Headers();
+export const headers = new Headers();
 headers.append('Content-Type', 'application/json');
-
-async function fetchJson(url, options) {
-    try {
-        const response = await fetch(url, options);
-        if (response.status === 204) {
-            return null;
-        }
-
-        const payload = await response.json();
-
-        if (payload.error) {
-            return Promise.reject({message: payload.error});
-        }
-        return payload;
-
-    } catch (error) {
-        if (error.name !== 'AbortError') {
-            console.error(error.stack);
-            throw error;
-        }
-    }
-}
 
 export async function createBuild(build) {
     const url = `${baseUrl}/builds`;
     const options = {
         method: 'POST',
         headers,
-        // will not post, but does not throw "unexpected end of json" error.
-        // change abck to JSON.stringify(build); to get it to post again
         body: JSON.stringify(build),
     };
     try {
@@ -40,7 +16,6 @@ export async function createBuild(build) {
     } catch (error) {
         console.log("I caught an error");
     }
-    // return await fetchJson(url, options);
 }
 
 export async function readBuild(buildId) {
@@ -49,7 +24,14 @@ export async function readBuild(buildId) {
         method: 'GET',
         headers
     };
-    return await fetchJson(url, options);
+    try {
+        const response = await fetch(url, options);
+        const data = response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+
 }
 
 export async function updateBuild(build) {
@@ -59,7 +41,6 @@ export async function updateBuild(build) {
         headers,
         body: JSON.stringify(build)
     };
-    return await fetchJson(url, options);
 }
 
 export async function listBuilds(params) {
@@ -67,5 +48,6 @@ export async function listBuilds(params) {
     Object.entries(params).forEach(([key, value]) =>
         url.searchParams.append(key, value.toString())
     );
-    return await fetchJson(url, {headers}, [])
+
 }
+

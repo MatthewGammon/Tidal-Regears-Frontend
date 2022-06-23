@@ -1,0 +1,53 @@
+.regears-list {
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.regears-header {
+    text-align: center;
+    padding: 1.5em;
+    margin: 1.5em auto;
+    background-color: #c9f0ff;
+    border-radius: 5px;
+}
+
+.regears-list table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: scroll;
+}
+
+.regears-table-headers th {
+    text-align: center;
+    background-color: #c9f0ff;
+    color: black;
+    font-size: 1.25rem;
+    padding: 0.5em;
+}
+
+.regears-table-headers th:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.regears-table-headers th:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.regear {
+    background-color: #c9f0ff;
+}
+
+.regears-list table tr:nth-child(even) {
+    background-color: #023753;
+    color: white;
+}
+
+.regears-list td {
+    text-align: center;
+    padding: 0.5em 1em;
+}

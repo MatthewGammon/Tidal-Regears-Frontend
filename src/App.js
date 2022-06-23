@@ -4,6 +4,7 @@ import Nav from '../src/components/layout/nav/Nav';
 import Home from '../src/components/layout/home/Home';
 import CreateBuild from '../src/components/builds/createABuild/CreateABuild';
 import ListBuilds from '../src/components/builds/listBuilds/ListBuilds';
+import Regears from '../src/components/regears/Regears';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
                     <Route path="/createBuild" element={<CreateBuild/>}/>
                     <Route path="/builds" element={<ListBuilds/>}/>
+                    <Route path="/regears" element={<Regears/>}/>
 
                 </Routes>
             </div>

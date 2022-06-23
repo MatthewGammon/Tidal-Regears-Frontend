@@ -18,6 +18,7 @@ export default function Nav() {
                 <a href="/home" className="active">
                     Home
                 </a>
+                <a href="/regears">Regear Requests</a>
                 <a href="/createBuild">Create a Build</a>
                 <a href="/builds">View Builds</a>
                 <a href="/about">About</a>
