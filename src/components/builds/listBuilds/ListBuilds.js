@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {baseUrl} from '../../../utils/api';
+import {baseUrl} from '../../../utils/buildsService';
 import './ListBuilds.css';
 
 export default function ListBuilds() {

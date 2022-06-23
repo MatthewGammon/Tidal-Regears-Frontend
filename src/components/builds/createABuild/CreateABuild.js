@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
-import {baseUrl, createBuild, readBuild, updateBuild} from '../../../utils/api';
+import {baseUrl, createBuild, updateBuild} from '../../../utils/buildsService';
 import './CreateABuild.css';
 
 export default function CreateABuild() {
