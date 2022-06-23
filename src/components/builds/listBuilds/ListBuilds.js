@@ -9,6 +9,7 @@ export default function ListBuilds() {
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
+        
         const loadBuilds = async () => {
             try {
                 const response = await fetch(`${baseUrl}/builds`, {signal});
@@ -23,8 +24,8 @@ export default function ListBuilds() {
         loadBuilds();
 
         return () => {
-            controller.abort();
             setFetchError(null);
+            controller.abort();
         };
     }, []);
 
@@ -43,7 +44,7 @@ export default function ListBuilds() {
                             <h4 className="min-tier">Minimum Tier Equivalent: {build.minimumTier}</h4>
                             <br/>
                             <div className="main-hand">Main Hand: {build.mainHand}</div>
-                            <div className="off-hand">Off Hand: {build.offHand}</div>
+                            <div className="off-hand">Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</div>
                             <div className="head-gear">Head: {build.headGear}</div>
                             <div className="chest-gear">Chest: {build.chestGear}</div>
                             <div className="shoes">Shoes: {build.shoes}</div>
