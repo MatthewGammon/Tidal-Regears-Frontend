@@ -9,11 +9,9 @@ async function fetchJson(url, options) {
         if (response.status === 204) {
             return null;
         }
-        console.log(response);
-        console.log(typeof response);
+
         const payload = await response.json();
-        console.log(typeof payload);
-        console.log(payload);
+
         if (payload.error) {
             return Promise.reject({message: payload.error});
         }
