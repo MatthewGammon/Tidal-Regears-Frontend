@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {baseUrl, updateStatus} from '../../utils/api';
+import {baseUrl, updateStatus} from '../../utils/regearsService';
 import {useNavigate} from 'react-router-dom';
 import './Regears.css';
 
@@ -50,7 +50,7 @@ export default function Regears() {
 
         }
     }
-const pending = regears?.filter((regear) => regear.status === "pending");
+    const pending = regears?.filter((regear) => regear.status === "pending");
     // only display regears with a status of pending. only display buttons for pending regears.
 
     return (
@@ -77,7 +77,7 @@ const pending = regears?.filter((regear) => regear.status === "pending");
                         <th>Approve/Reject</th>
                     </tr>
                     {
-                       pending?.map((regear) => (
+                        pending?.map((regear) => (
                             <tr className="regear" key={regear.regearId}>
                                 <td>{regear.regearId}</td>
                                 <td>{regear.status}</td>
