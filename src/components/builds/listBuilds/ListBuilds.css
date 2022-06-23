@@ -1,0 +1,12 @@
+.builds-list {
+    max-width: 70%;
+    margin: 1.5em auto;
+    padding: 1em;
+    background-color: #c9f0ff;
+    border-radius: 5px;
+}
+
+.build {
+    padding: 0.5em;
+}
+
