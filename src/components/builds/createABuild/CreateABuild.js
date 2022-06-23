@@ -76,10 +76,10 @@ export default function CreateABuild() {
                 await updateBuild(build);
                 navigate("/home");
             } else {
-                console.log("I am here")
                 await createBuild(build);
+                window.alert("Build successfully created!")
                 navigate("/home");
-                console.log("but I am not here")
+
             }
         } catch (error) {
             console.log("I caught something!")
@@ -119,6 +119,9 @@ export default function CreateABuild() {
                         <option value="Healer">Healer</option>
                         <option value="MeleeDPS">Melee DPS</option>
                         <option value="RangedDPS">Ranged DPS</option>
+                        <option value="BattleMount">Battle Mount</option>
+                        <option value="Rat">Ratletter</option>
+                        <option value="Other">Other</option>
                     </select>
 
                     <label htmlFor="min-tier">Minimum Tier Equivalent:</label>
