@@ -35,22 +35,16 @@ export default function CreateABuild() {
     const params = useParams();
     const buildId = params.buildId;
 
+    const urls = [`${baseUrl}/headGear`, `${baseUrl}/chestGear`, `${baseUrl}/shoes`, `${baseUrl}/mainHand`, `${baseUrl}/offHand`, `${baseUrl}/capes`, `${baseUrl}/food`, `${baseUrl}/potions`, `${baseUrl}/mounts`]
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         const loadMenus = async () => {
-            setFetchError(null);
             try {
-                const response = await Promise.all([
-                    fetch(`${baseUrl}/headGear`),
-                    fetch(`${baseUrl}/chestGear`),
-                    fetch(`${baseUrl}/shoes`),
-                    fetch(`${baseUrl}/mainHand`),
-                    fetch(`${baseUrl}/offHand`),
-                    fetch(`${baseUrl}/capes`),
-                    fetch(`${baseUrl}/food`),
-                    fetch(`${baseUrl}/potions`),
-                    fetch(`${baseUrl}/mounts`)]
-                );
+                const fetchJobs = urls.map((url) => fetch(url, {signal}));
+                const response = await Promise.all(fetchJobs);
                 const data = await Promise.all(response.map((res) => res.json()));
                 setHeadGear(data[0]);
                 setChestGear(data[1]);
@@ -62,10 +56,17 @@ export default function CreateABuild() {
                 setPotions(data[7]);
                 setMounts(data[8]);
             } catch (error) {
-                setFetchError(error);
+                if (error.name !== 'AbortError') {
+                    setFetchError(error);
+                }
             }
         }
         loadMenus();
+
+        return () => {
+            controller.abort();
+            setFetchError(null);
+        };
     }, []);
 
     const handleSubmit = async (event) => {
