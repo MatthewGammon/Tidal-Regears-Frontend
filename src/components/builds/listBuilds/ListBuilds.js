@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {baseUrl} from '../../../utils/buildsService';
+import {baseUrl, deleteBuild} from '../../../utils/buildsService';
+import {useNavigate} from 'react-router-dom';
 import './ListBuilds.css';
 
 export default function ListBuilds() {
     const [buildsList, setBuildsList] = useState(null);
     const [fetchError, setFetchError] = useState(null);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
-        
+
         const loadBuilds = async () => {
             try {
                 const response = await fetch(`${baseUrl}/builds`, {signal});
@@ -29,6 +32,20 @@ export default function ListBuilds() {
         };
     }, []);
 
+    const handleDelete = async (buildId) => {
+        try {
+            if (
+                window.confirm("Are you sure you want to delete this build? This cannot be undone.")
+            ) {
+                await deleteBuild(buildId);
+                navigate("/");
+            }
+        } catch (error) {
+
+        }
+
+    }
+
     return (
         <>
             <main className="builds-list">
@@ -37,23 +54,28 @@ export default function ListBuilds() {
                 </div>
                 {
                     buildsList?.map((build, id) => (
-                        <div className="build" key={build.buildId}>
-                            <h3 className="build-name">Build Name: {build.buildName}</h3>
-                            <h4 className="build-role">Role: {build.buildRole}</h4>
-                            <h4 className="min-ip">Minimum IP: {build.minimumIp}</h4>
-                            <h4 className="min-tier">Minimum Tier Equivalent: {build.minimumTier}</h4>
-                            <br/>
-                            <div className="main-hand">Main Hand: {build.mainHand}</div>
-                            <div className="off-hand">Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</div>
-                            <div className="head-gear">Head: {build.headGear}</div>
-                            <div className="chest-gear">Chest: {build.chestGear}</div>
-                            <div className="shoes">Shoes: {build.shoes}</div>
-                            <div className="cape">Cape: {build.cape}</div>
-                            <div className="food">Food: {build.food}</div>
-                            <div className="potion">Potion: {build.potion}</div>
-                            <div className="mount">Mount: {build.mount}</div>
-                        </div>
 
+                        <div className="build-columns" key={build.buildId}>
+                            <ul className="build" key={build.buildId}>
+                                <li className="build-name">{build.buildName}</li>
+                                <li className="grey">Role: {build.buildRole}</li>
+                                <li>Minimum IP: {build.minimumIp}</li>
+                                <li>Minimum Tier Equivalent: {build.minimumTier}</li>
+                                <li>Main Hand: {build.mainHand}</li>
+                                <li>Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</li>
+                                <li>Head: {build.headGear}</li>
+                                <li>Chest: {build.chestGear}</li>
+                                <li>Shoes: {build.shoes}</li>
+                                <li>Cape: {build.cape}</li>
+                                <li>Food: {build.food}</li>
+                                <li>Potion: {build.potion}</li>
+                                <li>Mount: {build.mount}</li>
+
+                                <button className="button">Edit</button>
+                                <button className="button" onClick={() => handleDelete(build.buildId)}>Delete
+                                </button>
+                            </ul>
+                        </div>
                     ))
                 }
 
