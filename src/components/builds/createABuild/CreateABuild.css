@@ -1,5 +1,5 @@
 .create-a-build {
-    max-width: 70%;
+    max-width: 55%;
     margin: 1.5em auto;
     padding: 1em;
     background-color: #c9f0ff;
@@ -9,11 +9,6 @@
 .create-build-header {
     text-align: center;
     padding: 0.5em 0;
-}
-
-.build-form {
-    max-width: 75%;
-    margin: 0 auto;
 }
 
 .create-build-fieldset {
