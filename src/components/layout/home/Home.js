@@ -110,7 +110,7 @@ export default function Home() {
                         <ol>
                             <li>
                                 Join the discord server
-                                <a href="https://discord.gg/DUuPwVzH" target="_blank">here</a> and
+                                <a href="https://discord.gg/DUuPwVzH" target="_blank"> here</a> and
                                 read the guild rules.
                             </li>
                             <li>
