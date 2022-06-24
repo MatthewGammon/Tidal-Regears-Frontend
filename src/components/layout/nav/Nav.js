@@ -31,10 +31,10 @@ export default function Nav() {
             <div className="header">
                 <div className="header-text">
                     <h1 className="header-primary">
-                        Albion Online Player Info and Regear
+                        Tidal Regear Management System [TRMS]
                     </h1>
                     <p className="header-lead">
-                        See your stats and submit regear requests!
+                        View and Manage Builds and Requests instantly!
                     </p>
                 </div>
             </div>
