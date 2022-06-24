@@ -1,6 +1,6 @@
 # Tidal Regear Management System
 This is only the front-end repository, the backend repository will be available as a link here when it is available.
-
+[Backend](https://github.com/MatthewGammon/TEKsystems-Case-Study-Backend)
 ## About
 This project will allow guild officers to manage the guild's regear system.
 
