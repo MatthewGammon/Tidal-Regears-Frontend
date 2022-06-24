@@ -12,9 +12,17 @@ export async function createBuild(build) {
     };
     try {
         const response = await fetch(url, options);
-        const payload = response.json();
+        console.log("response", response);
+    // this is awful, but I cannot seem to catch and display the proper error message from the backend
+        if(response.status == 400){
+            return Promise.reject({message: "A build with matching gear and power requirements already exists."});
+        }
+        return response
     } catch (error) {
-        console.log("I caught an error");
+        if (error.name !== 'AbortError'){
+            console.error(error.message);
+            throw error;
+        }
     }
 }
 
