@@ -1,7 +1,62 @@
-.home {
-    background-color: #c9f0ff;
+.home-main {
     max-width: 70%;
-    margin: 1em auto;
-    border-radius: 5px;
-    text-align: center;
+    margin: 1.5em auto;
+}
+
+.media {
+    display: flex;
+    justify-content: space-between;
+    min-height: 50vh;
+    padding: 3em 2.5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-image: url(../../../assets/images/Tidal-Logo-Background.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.vid-col1,
+.vid-col2 {
+    width: 35%;
+}
+
+.vid {
+    padding: 1em;
+}
+
+.vid-text {
+    color: white;
+    /* included web font */
+    font-family: 'Cormorant Garamond', serif;
+    padding: 0.5em 0em;
+}
+
+.yt-video {
+    width: 100%;
+    height: 315px;
+}
+
+.guild-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #c9f0ff;
+    padding: 2em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.guild-info h2,
+.guild-info h3 {
+    padding: 0.5em 0em;
+}
+
+.about-guild,
+.guild-offers,
+.guild-requirements,
+.how-to-join {
+    padding: 0.5em;
+}
+
+.regear-img {
+    width: 100%;
 }
