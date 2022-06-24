@@ -5,6 +5,7 @@ import Home from '../src/components/layout/home/Home';
 import CreateBuild from '../src/components/builds/createABuild/CreateABuild';
 import ListBuilds from '../src/components/builds/listBuilds/ListBuilds';
 import Regears from '../src/components/regears/Regears';
+import Requirements from '../src/components/requirements/Requirements';
 
 function App() {
     return (
@@ -14,9 +15,11 @@ function App() {
                 <Routes>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path="/createBuild" element={<CreateBuild/>}/>
-                    <Route path="/builds" element={<ListBuilds/>}/>
                     <Route path="/regears" element={<Regears/>}/>
+                    <Route path="/builds" element={<ListBuilds/>}/>
+                    <Route path="/createBuild" element={<CreateBuild/>}/>
+                    <Route path="/requirements" element={<Requirements/>}/>
+
 
                 </Routes>
             </div>

@@ -19,9 +19,9 @@ export default function Nav() {
                     Home
                 </a>
                 <a href="/regears">Regear Requests</a>
-                <a href="/createBuild">Create a Build</a>
                 <a href="/builds">View Builds</a>
-                <a href="/about">About</a>
+                <a href="/createBuild">Create a Build</a>
+                <a href="/requirements">Requirements</a>
 
                 <button className="icon" onClick={() => displayMenu()}>
                     <i className="fa fa-bars"></i>

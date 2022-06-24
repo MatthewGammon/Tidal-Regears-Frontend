@@ -8,7 +8,7 @@
 }
 
 .app {
-    overflow: hidden;
+    /*overflow: hidden;*/
     display: block;
     position: relative;
     background-color: #023753;
