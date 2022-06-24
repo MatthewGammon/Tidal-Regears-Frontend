@@ -6,6 +6,7 @@ import CreateBuild from '../src/components/builds/createABuild/CreateABuild';
 import ListBuilds from '../src/components/builds/listBuilds/ListBuilds';
 import Regears from '../src/components/regears/Regears';
 import Requirements from '../src/components/requirements/Requirements';
+import NotFound from '../src/errors/NotFound';
 
 function App() {
     return (
@@ -13,14 +14,13 @@ function App() {
             <div className="app">
                 <Nav/>
                 <Routes>
+                    <Route path="*" element={<NotFound/>}/>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
                     <Route path="/regears" element={<Regears/>}/>
                     <Route path="/builds" element={<ListBuilds/>}/>
                     <Route path="/createBuild" element={<CreateBuild/>}/>
                     <Route path="/requirements" element={<Requirements/>}/>
-
-
                 </Routes>
             </div>
         </BrowserRouter>
