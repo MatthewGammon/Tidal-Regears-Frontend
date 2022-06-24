@@ -119,9 +119,9 @@ export default function CreateABuild() {
                             <option value="Tank">Tank</option>
                             <option value="Support">Support</option>
                             <option value="Healer">Healer</option>
-                            <option value="MeleeDPS">Melee DPS</option>
-                            <option value="RangedDPS">Ranged DPS</option>
-                            <option value="BattleMount">Battle Mount</option>
+                            <option value="Melee DPS">Melee DPS</option>
+                            <option value="Ranged DPS">Ranged DPS</option>
+                            <option value="Battle Mount">Battle Mount</option>
                             <option value="Rat">Ratletter</option>
                             <option value="Other">Other</option>
                         </select>
