@@ -11,7 +11,66 @@
     padding: 0.5em 0;
 }
 
-.build {
+* {
+    box-sizing: border-box;
+}
+
+/* Create three columns of equal width */
+.build-columns {
+    margin: 2em 0;
+    float: left;
+    width: 33.3%;
     padding: 0.5em;
+}
+
+/* Style the list */
+.build {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* Add shadows on hover */
+.build:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+/* Pricing header */
+.build .build-name {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+}
+
+/* List items */
+.build li {
+    border-bottom: 1px solid #eee;
+    padding: 0.5em;
+    /*text-align: center;*/
+    background-color: #c9f0ff;
+}
+
+/* Grey list item */
+.build .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+/* The "Sign Up" button */
+.button {
+    background-color: #17628a;
+    color: white;
+    padding: 1em 1.5em;
+}
+
+/* Change the width of the three columns to 100%
+(to stack horizontally on small screens) */
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
 }
 

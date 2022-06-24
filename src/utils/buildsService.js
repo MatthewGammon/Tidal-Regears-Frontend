@@ -56,6 +56,18 @@ export async function listBuilds(params) {
     Object.entries(params).forEach(([key, value]) =>
         url.searchParams.append(key, value.toString())
     );
+}
 
+export async function deleteBuild(buildId){
+    const url = `${baseUrl}/builds/${buildId}`;
+    const options = {
+        method: 'DELETE',
+        headers
+    };
+    try {
+        const response = await fetch(url, options);
+    } catch (error){
+        console.error(error);
+    }
 }
 
