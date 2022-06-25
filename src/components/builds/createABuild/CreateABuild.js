@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
-import {baseUrl, createBuild, updateBuild} from '../../../utils/buildsService';
+import {baseUrl, createBuild, readBuild, updateBuild} from '../../../utils/buildsService';
 import './CreateABuild.css';
 import ErrorAlert from '../../../errors/ErrorAlert';
 
@@ -56,6 +56,15 @@ export default function CreateABuild() {
                 setFood(data[6]);
                 setPotions(data[7]);
                 setMounts(data[8]);
+                if (buildId){
+                    const originalBuild = await readBuild(
+                        buildId,
+                        controller.signal
+                    );
+                    setBuild(originalBuild);
+                    console.log(originalBuild)
+                    console.log(build)
+                }
             } catch (error) {
                 if (error.name !== 'AbortError') {
                     setFetchError(error);
@@ -68,20 +77,31 @@ export default function CreateABuild() {
             controller.abort();
             setFetchError(null);
         };
-    }, []);
+    }, [buildId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setBuildError(null);
-        try {
-            await createBuild(build);
-            window.alert("Build successfully created!")
-            navigate("/builds");
-        } catch (error) {
-            console.log("I caught something bad")
-            setBuildError(error);
-            window.scrollTo(0, 0);
+        if (buildId) {
+            try {
+                await updateBuild(build)
+                window.alert("Build successfully updated");
+                navigate("/builds");
+            } catch (error) {
+                setBuildError(error);
+            }
+        } else {
+            try {
+                await createBuild(build);
+                window.alert("Build successfully created!")
+                navigate("/builds");
+            } catch (error) {
+                console.log("I caught something bad")
+                setBuildError(error);
+                window.scrollTo(0, 0);
+            }
         }
+
     }
 
     const handleChange = async ({target: {name, value}}) => {
@@ -101,20 +121,29 @@ export default function CreateABuild() {
             )}
             <main className="create-a-build">
                 <div className="create-build-header">
-                    <h2>Create a New Build</h2>
+                    {buildId ?
+                        <h2>Edit {build.buildName}</h2>
+                        :
+                        <h2>Create a New Build</h2>
+                    }
+
                 </div>
                 <form className="build-form" onSubmit={handleSubmit}>
                     <fieldset className="create-build-fieldset">
                         <legend className="create-build-legend">Build Info</legend>
 
                         <label htmlFor="build-name">Build Name:</label>
-                        <input type="text" id="build-name" name="buildName" value={build.build_name}
+                        <input type="text" id="build-name" name="buildName" value={build.buildName}
                                onChange={handleChange}
                                required
                         />
 
                         <label htmlFor="build-role">Build Role:</label>
                         <select name="buildRole" id="build-role" onChange={handleChange} required>
+                            {
+                                buildId &&
+                                <option value={build.buildRole}>{build.buildRole}</option>
+                            }
                             <option value="">-- Select A Role --</option>
                             <option value="Tank">Tank</option>
                             <option value="Support">Support</option>
@@ -128,6 +157,7 @@ export default function CreateABuild() {
 
                         <label htmlFor="min-tier">Minimum Tier Equivalent:</label>
                         <input name="minimumTier" type="number" id="min-tier" min="6" max="10" placeholder={8}
+                               value={build.minimumTier}
                                onChange={handleChange}
                                required
                         />
@@ -135,6 +165,7 @@ export default function CreateABuild() {
                         <label htmlFor="minimum-ip">Minimum IP:</label>
                         <input name="minimumIp" type="number" id="minimum-ip" min="1200" max="1950" step="50"
                                placeholder={1350}
+                               value={build.minimumIp}
                                onChange={handleChange}
                                required
                         />
@@ -149,6 +180,10 @@ export default function CreateABuild() {
                                 id="head-gear-select"
                                 onChange={handleChange}
                                 required>
+                                {
+                                    buildId &&
+                                    <option value={build.headGear}>{build.headGear}</option>
+                                }
                                 <option value="">-- Select Head Gear --</option>
                                 {
                                     headGear?.map((headGear, id) => (
@@ -167,6 +202,10 @@ export default function CreateABuild() {
                                 onChange={handleChange}
                                 required
                             >
+                                {
+                                    buildId &&
+                                    <option value={build.chestGear}>{build.chestGear}</option>
+                                }
                                 <option value="">-- Select Chest Gear --</option>
                                 {
                                     chestGear?.map((chestGear, id) => (
@@ -182,6 +221,10 @@ export default function CreateABuild() {
                             <select name="shoes" id="shoes-select"
                                     onChange={handleChange}
                                     required>
+                                {
+                                    buildId &&
+                                    <option value={build.shoes}>{build.shoes}</option>
+                                }
                                 <option value="">-- Select Shoes --</option>
                                 {
                                     shoes?.map((shoe, id) => (
@@ -196,6 +239,10 @@ export default function CreateABuild() {
                         <div className="mainHands">
                             <label htmlFor="mainHand-select">Main Hand:</label>
                             <select name="mainHand" id="mainHand-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.mainHand}>{build.mainHand}</option>
+                                }
                                 <option value="">-- Select Main Hand --</option>
                                 {
                                     mainHand?.map((mainHand, id) => (
@@ -209,6 +256,10 @@ export default function CreateABuild() {
                         <div className="offHands">
                             <label htmlFor="offHand-select">Off Hand:</label>
                             <select name="offHand" id="offHand-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.offHand}>{build.offHand !== "null" ? build.offHand : "None"}</option>
+                                }
                                 <option value="">-- Select Off Hand --</option>
                                 <option value="null">None</option>
                                 {
@@ -225,6 +276,10 @@ export default function CreateABuild() {
                         <div className="capes">
                             <label htmlFor="capes-select">Cape:</label>
                             <select name="cape" id="capes-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.cape}>{build.cape}</option>
+                                }
                                 <option value="">-- Select Cape --</option>
                                 {
                                     capes?.map((cape, id) => (
@@ -239,6 +294,10 @@ export default function CreateABuild() {
                         <div className="food">
                             <label htmlFor="food-select">Food:</label>
                             <select name="food" id="food-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.food}>{build.food}</option>
+                                }
                                 <option value="">-- Select Food --</option>
                                 {
                                     food?.map((food, id) => (
@@ -251,6 +310,10 @@ export default function CreateABuild() {
                         <div className="potions">
                             <label htmlFor="potions-select">Potion:</label>
                             <select name="potion" id="potions-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.potion}>{build.potion}</option>
+                                }
                                 <option value="">-- Select Potion --</option>
                                 {
                                     potions?.map((potion, id) => (
@@ -266,6 +329,10 @@ export default function CreateABuild() {
                         <div className="mounts">
                             <label htmlFor="mounts-select">Mount:</label>
                             <select name="mount" id="mounts-select" onChange={handleChange} required>
+                                {
+                                    buildId &&
+                                    <option value={build.mount}>{build.mount}</option>
+                                }
                                 <option value="">-- Select Mount --</option>
                                 {
                                     mounts?.map((mount, id) => (
