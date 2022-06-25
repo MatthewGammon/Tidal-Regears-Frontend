@@ -122,7 +122,7 @@ export default function CreateABuild() {
             <main className="create-a-build">
                 <div className="create-build-header">
                     {buildId ?
-                        <h2>Edit {build.buildName}</h2>
+                        <h2>Edit Selected Build</h2>
                         :
                         <h2>Create a New Build</h2>
                     }
