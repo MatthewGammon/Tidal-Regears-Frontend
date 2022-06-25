@@ -49,6 +49,13 @@ export async function updateBuild(build) {
         headers,
         body: JSON.stringify(build)
     };
+    try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        return data;
+    } catch (error){
+        console.error(error);
+    }
 }
 
 export async function listBuilds(params) {
