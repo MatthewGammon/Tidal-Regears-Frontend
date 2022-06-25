@@ -32,18 +32,21 @@ export default function ListBuilds() {
         };
     }, []);
 
+    const handleEdit = async (buildId) => {
+        navigate(`/builds/${buildId}/edit`)
+    }
+
     const handleDelete = async (buildId) => {
         try {
             if (
                 window.confirm("Are you sure you want to delete this build? This cannot be undone.")
             ) {
                 await deleteBuild(buildId);
-                navigate("/");
+                window.location.reload();
             }
         } catch (error) {
-
+            setFetchError(error)
         }
-
     }
 
     return (
@@ -71,7 +74,7 @@ export default function ListBuilds() {
                                 <li>Potion: {build.potion}</li>
                                 <li>Mount: {build.mount}</li>
 
-                                <button className="button">Edit</button>
+                                <button className="button" onClick={() => handleEdit(build.buildId)}>Edit</button>
                                 <button className="button" onClick={() => handleDelete(build.buildId)}>Delete
                                 </button>
                             </ul>

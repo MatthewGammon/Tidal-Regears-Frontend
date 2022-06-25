@@ -20,7 +20,7 @@ export default function Nav() {
                 </a>
                 <a href="/regears">Regear Requests</a>
                 <a href="/builds">View Builds</a>
-                <a href="/createBuild">Create a Build</a>
+                <a href="/builds/new">Create a Build</a>
                 <a href="/requirements">Requirements</a>
 
                 <button className="icon" onClick={() => displayMenu()}>
