@@ -19,7 +19,8 @@ function App() {
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
                     <Route path="/regears" element={<Regears/>}/>
                     <Route path="/builds" element={<ListBuilds/>}/>
-                    <Route path="/createBuild" element={<CreateBuild/>}/>
+                    <Route path="/builds/new" element={<CreateBuild/>}/>
+                    <Route path="/builds/:buildId/edit" element={<CreateBuild/>}/>
                     <Route path="/requirements" element={<Requirements/>}/>
                 </Routes>
             </div>
