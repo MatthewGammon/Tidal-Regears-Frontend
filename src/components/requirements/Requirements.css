@@ -13,6 +13,8 @@
 .requirements h2,
 .requirements h3,
 .requirements h4 {
+    font-family: Garamond sans-serif;
+    font-weight: bold;
     padding: 0.5em 0em;
 }
 
@@ -37,4 +39,8 @@
 .builds,
 .battlemounts {
     padding: 1.5em 0em;
+}
+
+.disclaimer-list a {
+    text-decoration: none;
 }

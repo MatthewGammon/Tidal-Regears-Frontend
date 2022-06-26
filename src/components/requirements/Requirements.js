@@ -27,7 +27,7 @@ export default function Requirements(){
                             </li>
                             <li>
                                 Off-hands, Capes, Mounts and Consumables are
-                                <b>NOT</b> re-geared.
+                                <b> NOT</b> re-geared.
                             </li>
                         </ul>
                     </div>
@@ -66,7 +66,7 @@ export default function Requirements(){
                                 Anything written above can be overwritten by an update that is
                                 more recent. Make sure to see the most up to date post in the
                                 discord server
-                                <a href="https://discord.gg/6RnFRVWE" target="_blank">here</a>.
+                                <a href="https://discord.gg/6RnFRVWE" target="_blank"> here</a>.
                             </li>
                         </ul>
                     </div>
@@ -104,40 +104,12 @@ export default function Requirements(){
                         <p>
                             <b>
                                 Anyone playing an unapproved build in CTA's will be fined 2mil
-                                silver.
-                            </b>
-                            Roamings are at shotcaller discretion.
+                                silver. 
+                            </b> Roamings are at shotcaller discretion.
                         </p>
                     </div>
                 </div>
             </section>
-            {/*<section className="requirements-media">*/}
-            {/*    <div className="builds">*/}
-            {/*        <img*/}
-            {/*            className="approved-builds"*/}
-            {/*            src="../assets/images/tidal-regear-reqs.png"*/}
-            {/*            alt="Tidal approved ZVZ builds"*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*    <div className="battlemounts">*/}
-            {/*        <h2*/}
-            {/*            style="*/}
-            {/*  background-color: #c9f0ff;*/}
-            {/*  text-align: center;*/}
-            {/*  padding: 1em;*/}
-            {/*  border-top-left-radius: 5px;*/}
-            {/*  border-top-right-radius: 5px;*/}
-            {/*"*/}
-            {/*        >*/}
-            {/*            Battle Mount Builds*/}
-            {/*        </h2>*/}
-            {/*        <img*/}
-            {/*            className="battlemount-builds"*/}
-            {/*            src="../assets/images/tidal-battlemount-builds.png"*/}
-            {/*            alt="Tidal approved battlemount builds"*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*</section>*/}
         </main>
     )
 }

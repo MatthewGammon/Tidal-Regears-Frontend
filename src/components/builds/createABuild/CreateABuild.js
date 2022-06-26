@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
-import {baseUrl, createBuild, readBuild, updateBuild} from '../../../utils/buildsService';
+import {baseUrl, createBuild, readBuild, updateBuild} from '../../../services/buildsService'
 import './CreateABuild.css';
 import ErrorAlert from '../../../errors/ErrorAlert';
 
@@ -39,12 +39,9 @@ export default function CreateABuild() {
     const urls = [`${baseUrl}/headGear`, `${baseUrl}/chestGear`, `${baseUrl}/shoes`, `${baseUrl}/mainHand`, `${baseUrl}/offHand`, `${baseUrl}/capes`, `${baseUrl}/food`, `${baseUrl}/potions`, `${baseUrl}/mounts`]
 
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-
         const loadMenus = async () => {
             try {
-                const fetchJobs = urls.map((url) => fetch(url, {signal}));
+                const fetchJobs = urls.map((url) => fetch(url));
                 const response = await Promise.all(fetchJobs);
                 const data = await Promise.all(response.map((res) => res.json()));
                 setHeadGear(data[0]);
@@ -59,7 +56,6 @@ export default function CreateABuild() {
                 if (buildId){
                     const originalBuild = await readBuild(
                         buildId,
-                        controller.signal
                     );
                     setBuild(originalBuild);
                     console.log(originalBuild)
@@ -74,7 +70,6 @@ export default function CreateABuild() {
         loadMenus();
 
         return () => {
-            controller.abort();
             setFetchError(null);
         };
     }, [buildId]);
@@ -342,7 +337,7 @@ export default function CreateABuild() {
                             </select>
                         </div>
                     </fieldset>
-                    <button className="build-submit-button" type="submit">Submit Build</button>
+                    <button className="build-submit-button btn" type="submit">Submit Build</button>
                 </form>
             </main>
         </>

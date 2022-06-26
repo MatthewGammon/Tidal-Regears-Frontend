@@ -1,7 +1,10 @@
+import authHeader from '../services/auth-header';
+
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const headers = new Headers();
 headers.append('Content-Type', 'application/json');
+
 
 export async function createBuild(build) {
     const url = `${baseUrl}/builds`;
@@ -30,7 +33,7 @@ export async function readBuild(buildId) {
     const url = `${baseUrl}/builds/${buildId}`;
     const options = {
         method: 'GET',
-        headers
+        headers: authHeader(),
     };
     try {
         const response = await fetch(url, options);
@@ -69,7 +72,7 @@ export async function deleteBuild(buildId){
     const url = `${baseUrl}/builds/${buildId}`;
     const options = {
         method: 'DELETE',
-        headers
+        headers: authHeader(),
     };
     try {
         const response = await fetch(url, options);
