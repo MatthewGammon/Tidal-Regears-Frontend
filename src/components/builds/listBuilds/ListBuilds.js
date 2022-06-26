@@ -1,34 +1,43 @@
 import React, {useState, useEffect} from 'react';
-import {baseUrl, deleteBuild} from '../../../utils/buildsService';
+import {baseUrl, deleteBuild} from '../../../services/buildsService';
 import {useNavigate} from 'react-router-dom';
+import AuthService from '../../../services/auth.service'
+import authHeader from '../../../services/auth-header';
 import './ListBuilds.css';
+import ErrorAlert from '../../../errors/ErrorAlert';
 
 export default function ListBuilds() {
     const [buildsList, setBuildsList] = useState(null);
     const [fetchError, setFetchError] = useState(null);
 
+    const currentUser = AuthService.getCurrentUser();
+    const isAdmin = currentUser?.roles.includes("ROLE_ADMIN");
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        const loadBuilds = async () => {
+        const getBuilds = async () => {
+            const url = `${baseUrl}/builds`;
+            const options = {
+                method: 'GET',
+                headers: authHeader(),
+            };
             try {
-                const response = await fetch(`${baseUrl}/builds`, {signal});
+                const response = await fetch(url, options);
                 const data = await response.json();
+                if (response.status >= 400 && response.status < 600) {
+                    console.log(response)
+                    throw new Error(`${response.status == 401 ? "Unauthorized" : response.status == 403 ? "Forbidden" : "Oops"}`);
+                }
                 setBuildsList(data);
             } catch (error) {
-                if (error.name !== 'AbortError') {
-                    setFetchError(null);
-                }
+                setFetchError(error)
             }
         }
-        loadBuilds();
+        getBuilds();
 
         return () => {
             setFetchError(null);
-            controller.abort();
         };
     }, []);
 
@@ -51,36 +60,54 @@ export default function ListBuilds() {
 
     return (
         <>
+            {
+                fetchError && (
+                    <ErrorAlert error={fetchError}/>
+                )
+            }
+
             <main className="builds-list">
                 <div className="build-header">
                     <h2>Currently Approved ZVZ Builds</h2>
                 </div>
-                {
-                    buildsList?.map((build, id) => (
+                <div className="build-container">
+                    {
+                        buildsList?.map((build, id) => (
 
-                        <div className="build-columns" key={build.buildId}>
-                            <ul className="build" key={build.buildId}>
-                                <li className="build-name">{build.buildName}</li>
-                                <li className="grey">Role: {build.buildRole}</li>
-                                <li>Minimum IP: {build.minimumIp}</li>
-                                <li>Minimum Tier Equivalent: {build.minimumTier}</li>
-                                <li>Main Hand: {build.mainHand}</li>
-                                <li>Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</li>
-                                <li>Head: {build.headGear}</li>
-                                <li>Chest: {build.chestGear}</li>
-                                <li>Shoes: {build.shoes}</li>
-                                <li>Cape: {build.cape}</li>
-                                <li>Food: {build.food}</li>
-                                <li>Potion: {build.potion}</li>
-                                <li>Mount: {build.mount}</li>
+                            <div className="build" key={build.buildId}>
+                                <ul className="build-ul">
+                                    <li className="build-name">{build.buildName}</li>
+                                    <li className="grey">Role: {build.buildRole}</li>
+                                    <li>Minimum IP: {build.minimumIp}</li>
+                                    <li>Minimum Tier Equivalent: {build.minimumTier}</li>
+                                    <li>Main Hand: {build.mainHand}</li>
+                                    <li>Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</li>
+                                    <li>Head: {build.headGear}</li>
+                                    <li>Chest: {build.chestGear}</li>
+                                    <li>Shoes: {build.shoes}</li>
+                                    <li>Cape: {build.cape}</li>
+                                    <li>Food: {build.food}</li>
+                                    <li>Potion: {build.potion}</li>
+                                    <li>Mount: {build.mount}</li>
+                                    {
+                                        isAdmin && (
+                                            <div className="editButtons">
+                                                <button className="edit-build-button btn"
+                                                        onClick={() => handleEdit(build.buildId)}>Edit
+                                                </button>
+                                                <button className="delete-build-button btn"
+                                                        onClick={() => handleDelete(build.buildId)}>Delete
+                                                </button>
+                                            </div>
 
-                                <button className="button" onClick={() => handleEdit(build.buildId)}>Edit</button>
-                                <button className="button" onClick={() => handleDelete(build.buildId)}>Delete
-                                </button>
-                            </ul>
-                        </div>
-                    ))
-                }
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </div>
+
 
             </main>
         </>
