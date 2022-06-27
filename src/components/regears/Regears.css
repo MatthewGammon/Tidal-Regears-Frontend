@@ -10,7 +10,7 @@
     text-align: center;
     padding: 1.5em;
     margin: 1.5em auto;
-    background-color: #c9f0ff;
+    background-color: #81bfd6;
     border-radius: 5px;
     box-shadow: 0px 5px 10px rgb(0 0 0 / 0.5);
 }
@@ -31,8 +31,9 @@
 
 .regears-table-headers th {
     text-align: center;
-    background-color: #c9f0ff;
-    color: black;
+    background-color:#03293d;
+    color: white;
+    font-family: Garamond sans-serif;
     font-size: 1.25rem;
     padding: 0.5em;
 }
@@ -48,10 +49,10 @@
 }
 
 .regear {
-    background-color: #c9f0ff;
+    background-color: #81bfd6;
 }
 
-.regears-list table tr:nth-child(even) {
+.regears-list table tr:nth-child(odd) {
     background-color: #023753;
     color: white;
 }
@@ -59,11 +60,13 @@
 .regears-list td {
     text-align: center;
     padding: 0.5em 1em;
+    font-weight: 600;
 }
 
 .regears-list td:first-child {
     padding: 0.5em 0;
 }
+
 .regears-list td:last-child {
     padding: 0.5em 0;
 }
@@ -74,31 +77,31 @@
     width: 70%;
 }
 
-@media only screen and (max-width: 1750px){
+@media only screen and (max-width: 1750px) {
     .regears-list {
         max-width: 80%;
     }
 }
 
-@media only screen and (max-width: 1500px){
+@media only screen and (max-width: 1500px) {
     .regears-list {
         max-width: 85%;
     }
 }
 
-@media only screen and (max-width: 1300px){
+@media only screen and (max-width: 1300px) {
     .regears-list {
         max-width: 90%;
     }
 }
 
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1200px) {
     .regears-list {
         max-width: 95%;
     }
 }
 
-@media only screen and (max-width: 1110px){
+@media only screen and (max-width: 1110px) {
     .regears-list {
         max-width: 100%;
     }
