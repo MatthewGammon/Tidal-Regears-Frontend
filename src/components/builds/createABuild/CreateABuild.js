@@ -71,7 +71,7 @@ export default function CreateABuild() {
         return () => {
             setFetchError(null);
         };
-    }, [buildId, build]);
+    }, [buildId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
