@@ -27,7 +27,7 @@ export default function ListBuilds() {
                 const data = await response.json();
                 if (response.status >= 400 && response.status < 600) {
                     console.log(response)
-                    throw new Error(`${response.status == 401 ? "Unauthorized" : response.status == 403 ? "Forbidden" : "Oops"}`);
+                    throw new Error(`${response.status === 401 ? "Unauthorized" : response.status === 403 ? "Forbidden" : "Oops"}`);
                 }
                 setBuildsList(data);
             } catch (error) {
@@ -80,7 +80,7 @@ export default function ListBuilds() {
                                     <li>Minimum IP: {build.minimumIp}</li>
                                     <li>Minimum Tier Equivalent: {build.minimumTier}</li>
                                     <li>Main Hand: {build.mainHand}</li>
-                                    <li>Off Hand: {build.offHand != "null" ? build.offHand : "N/A"}</li>
+                                    <li>Off Hand: {build.offHand !== "null" ? build.offHand : "N/A"}</li>
                                     <li>Head: {build.headGear}</li>
                                     <li>Chest: {build.chestGear}</li>
                                     <li>Shoes: {build.shoes}</li>
