@@ -75,7 +75,7 @@ export async function deleteBuild(buildId){
         headers: authHeader(),
     };
     try {
-        const response = await fetch(url, options);
+        return await fetch(url, options);
     } catch (error){
         console.error(error);
     }
