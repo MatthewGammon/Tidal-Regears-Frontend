@@ -73,7 +73,6 @@ export default function ListBuilds() {
                 <div className="build-container">
                     {
                         buildsList?.map((build, id) => (
-
                             <div className="build" key={build.buildId}>
                                 <ul className="build-ul">
                                     <li className="build-name">{build.buildName}</li>
@@ -107,8 +106,6 @@ export default function ListBuilds() {
                         ))
                     }
                 </div>
-
-
             </main>
         </>
     )

@@ -1,14 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {baseUrl, updateStatus} from '../../services/regearsService';
-import UserService from '../../services/user.service';
+import {baseUrl} from '../../services/regearsService';
 import authHeader from '../../services/auth-header';
-import AuthService from '../../services/auth.service';
 import ErrorAlert from '../../errors/ErrorAlert';
 import './Regears.css';
 import RegearsTable from './RegearsTable';
-
-const currentUser = AuthService.getCurrentUser();
-const isAdmin = currentUser?.roles.includes("ROLE_ADMIN");
 
 export default function Regears() {
     const [regears, setRegears] = useState(null);
@@ -27,7 +22,7 @@ export default function Regears() {
                 const data = await response.json();
                 if (response.status >= 400 && response.status < 600) {
                     console.log(response)
-                    throw new Error(`${response.status == 401 ? "Unauthorized" : response.status == 403 ? "Forbidden" : "Oops"}`);
+                    throw new Error(`${response.status === 401 ? "Unauthorized" : response.status === 403 ? "Forbidden" : "Oops"}`);
                 }
                 setRegears(data);
             } catch (error) {
