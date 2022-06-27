@@ -5,7 +5,6 @@ import './Nav.css';
 export default function Nav() {
     const currentUser = AuthService.getCurrentUser();
     const isAdmin = currentUser?.roles.includes("ROLE_ADMIN");
-    const isUser = currentUser?.roles.includes("ROLE_USER");
     const isAdminOrUser = currentUser;
 
     function displayMenu() {
