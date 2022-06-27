@@ -15,7 +15,6 @@ export default function CreateABuild() {
     const [potions, setPotions] = useState(null);
     const [mounts, setMounts] = useState(null);
     const [fetchError, setFetchError] = useState(null);
-    const [buildError, setBuildError] = useState(null);
     const [build, setBuild] = useState({
         buildName: '',
         buildRole: '',
@@ -36,11 +35,11 @@ export default function CreateABuild() {
     const params = useParams();
     const buildId = params.buildId;
 
-    const urls = [`${baseUrl}/headGear`, `${baseUrl}/chestGear`, `${baseUrl}/shoes`, `${baseUrl}/mainHand`, `${baseUrl}/offHand`, `${baseUrl}/capes`, `${baseUrl}/food`, `${baseUrl}/potions`, `${baseUrl}/mounts`]
 
     useEffect(() => {
         const loadMenus = async () => {
             try {
+                const urls = [`${baseUrl}/headGear`, `${baseUrl}/chestGear`, `${baseUrl}/shoes`, `${baseUrl}/mainHand`, `${baseUrl}/offHand`, `${baseUrl}/capes`, `${baseUrl}/food`, `${baseUrl}/potions`, `${baseUrl}/mounts`]
                 const fetchJobs = urls.map((url) => fetch(url));
                 const response = await Promise.all(fetchJobs);
                 const data = await Promise.all(response.map((res) => res.json()));
@@ -53,7 +52,7 @@ export default function CreateABuild() {
                 setFood(data[6]);
                 setPotions(data[7]);
                 setMounts(data[8]);
-                if (buildId){
+                if (buildId) {
                     const originalBuild = await readBuild(
                         buildId,
                     );
@@ -72,18 +71,18 @@ export default function CreateABuild() {
         return () => {
             setFetchError(null);
         };
-    }, [buildId]);
+    }, [buildId, build]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setBuildError(null);
+        setFetchError(null);
         if (buildId) {
             try {
                 await updateBuild(build)
                 window.alert("Build successfully updated");
                 navigate("/builds");
             } catch (error) {
-                setBuildError(error);
+                setFetchError(error);
             }
         } else {
             try {
@@ -92,7 +91,7 @@ export default function CreateABuild() {
                 navigate("/builds");
             } catch (error) {
                 console.log("I caught something bad")
-                setBuildError(error);
+                setFetchError(error);
                 window.scrollTo(0, 0);
             }
         }
@@ -109,9 +108,9 @@ export default function CreateABuild() {
 
     return (
         <>
-            {buildError && (
+            {fetchError && (
                 <div className="error-alert">
-                    <ErrorAlert error={buildError}/>
+                    <ErrorAlert error={fetchError}/>
                 </div>
             )}
             <main className="create-a-build">
@@ -253,7 +252,8 @@ export default function CreateABuild() {
                             <select name="offHand" id="offHand-select" onChange={handleChange} required>
                                 {
                                     buildId &&
-                                    <option value={build.offHand}>{build.offHand !== "null" ? build.offHand : "None"}</option>
+                                    <option
+                                        value={build.offHand}>{build.offHand !== "null" ? build.offHand : "None"}</option>
                                 }
                                 <option value="">-- Select Off Hand --</option>
                                 <option value="null">None</option>
