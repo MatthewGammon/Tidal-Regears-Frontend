@@ -68,7 +68,7 @@ export default function ListBuilds() {
 
             <main className="builds-list">
                 <div className="build-header">
-                    <h2>Currently Approved ZVZ Builds</h2>
+                    <h2>Approved ZVZ Builds</h2>
                 </div>
                 <div className="build-container">
                     {
