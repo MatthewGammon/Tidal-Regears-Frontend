@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from 'react-router-dom';
-import {baseUrl, updateStatus} from '../../services/regearsService';
+import {updateStatus} from '../../services/regearsService';
 import AuthService from '../../services/auth.service';
 
 export default function RegearsTable({regearData}) {
@@ -63,9 +63,13 @@ export default function RegearsTable({regearData}) {
                         {
                             isAdmin && (
                                 <td regear-table-buttons>
-                                    <button className="update-button btn mb-1" onClick={() => handleApprove(regear.regearId, regear)}>Approve</button>
+                                    <button className="update-button btn mb-1"
+                                            onClick={() => handleApprove(regear.regearId, regear)}>Approve
+                                    </button>
                                     <br/>
-                                    <button className="update-button btn mt-1" onClick={() => handleReject(regear.regearId, regear)}>Reject</button>
+                                    <button className="update-button btn mt-1"
+                                            onClick={() => handleReject(regear.regearId, regear)}>Reject
+                                    </button>
                                 </td>
                             )
                         }
