@@ -1,18 +1,33 @@
 # Tidal Regear Management System
-This is only the front-end repository, the backend repository will be available as a link here when it is available.
-[Backend](https://github.com/MatthewGammon/TEKsystems-Case-Study-Backend)
-## About
-This project will allow guild officers to manage the guild's regear system.
+React Frontend for the Tidal Regear Management System
 
-### Approved users will be able to do the following:
+## Project Goals
+The number one goal with this project was to eliminate the manual entry of code and management of documents that go into managing a guild's regear system.
+I set out to create a smooth and seamless application that works in conjuction with the Albion Player Info application ([repo here](https://github.com/MatthewGammon/Albion-Player-Info), [Live application](https://albion-player-info.vercel.app/home))
+to create and manage builds and regear requests. 
 
-* Specify the minimum IP and tier equivalency for a piece of gear or a full build.
-* Approve/Deny/Delete individual regear requests.
-* View data visualizations for the number of pending and rejected regears as well as data about how many of each piece
-  of gear are currently owed to members.
+## Key Functionality
+An guild officer with sufficient admin perms will be able to:
+* Create a new build from a form that contains all of the weapons and armor in the game
+* Edit and Delete created builds
+* View all currently pending regear requests that have been submitted by guild members
+* Approve or Reject regear requests
 
-### Regular guild members will be able to:
+A regular user will be able to:
+* Register an account and log in
+* View information about the guild (useful for new and potential members)
+* View requirements for joining the guild as well as requirements for getting an approved regear request
+* View all builds that have been approved and created by the guild officers/admin
 
-* View all currently pending regears for the guild.
-* Search for their character and view only their regear requests.
-* If a player's request is denied, they will be able to contact a guild officer to dispute the rejected request.
+
+## Tech and Tools
+* JavaScript
+* React
+* HTML
+* CSS
+* Bootstrap
+
+
+## Project Backend
+[Tidal Regears Backend](https://github.com/MatthewGammon/Tidal-Regears-Backend)
+
