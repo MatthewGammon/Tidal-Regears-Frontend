@@ -1,5 +1,6 @@
 # Tidal Regear Management System
 React Frontend for the Tidal Regear Management System
+<br>
 [Deployed App](https://tidal-regears-frontend.vercel.app)
 
 ## Project Goals
