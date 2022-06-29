@@ -12,8 +12,7 @@ export async function updateStatus(regearId, regear) {
     };
     try {
         const response = await fetch(url, options);
-        const data = response.json();
-        return data;
+        return response.json();
     } catch (error){
         console.error(error);
     }
