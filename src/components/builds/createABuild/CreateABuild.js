@@ -57,8 +57,6 @@ export default function CreateABuild() {
                         buildId,
                     );
                     setBuild(originalBuild);
-                    console.log(originalBuild)
-                    console.log(build)
                 }
             } catch (error) {
                 if (error.name !== 'AbortError') {
@@ -90,7 +88,6 @@ export default function CreateABuild() {
                 window.alert("Build successfully created!")
                 navigate("/builds");
             } catch (error) {
-                console.log("I caught something bad")
                 setFetchError(error);
                 window.scrollTo(0, 0);
             }

@@ -20,7 +20,7 @@ export async function getRegears(){
         }
         return data;
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 

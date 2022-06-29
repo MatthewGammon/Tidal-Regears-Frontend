@@ -21,7 +21,6 @@ export default function Regears() {
                 const response = await fetch(url, options);
                 const data = await response.json();
                 if (response.status >= 400 && response.status < 600) {
-                    console.log(response)
                     throw new Error(`${response.status === 401 ? "Unauthorized" : response.status === 403 ? "Forbidden" : "Oops"}`);
                 }
                 setRegears(data);
