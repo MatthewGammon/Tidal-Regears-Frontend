@@ -33,6 +33,7 @@ const Register = () => {
                 (response) => {
                     setMessage(response.data.message);
                     setSuccessful(true);
+                    alert("You have successfully registered an account!")
                     navigate("/login");
                 },
                 (error) => {
