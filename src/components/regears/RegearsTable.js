@@ -62,7 +62,7 @@ export default function RegearsTable({regearData}) {
                         <td>{regear.eventId}</td>
                         {
                             isAdmin && (
-                                <td regear-table-buttons>
+                                <td regear-table-buttons="true">
                                     <button className="update-button btn mb-1"
                                             onClick={() => handleApprove(regear.regearId, regear)}>Approve
                                     </button>
