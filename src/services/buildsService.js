@@ -15,15 +15,13 @@ export async function createBuild(build) {
     };
     try {
         const response = await fetch(url, options);
-        console.log("response", response);
-    // this is awful, but I cannot seem to catch and display the proper error message from the backend
-        if(response.status === 400){
+        // this is awful, but I cannot seem to catch and display the proper error message from the backend
+        if (response.status === 400) {
             return Promise.reject({message: "A build with matching gear and power requirements already exists."});
         }
         return response
     } catch (error) {
-        if (error.name !== 'AbortError'){
-            console.error(error.message);
+        if (error.name !== 'AbortError') {
             throw error;
         }
     }
@@ -37,10 +35,9 @@ export async function readBuild(buildId) {
     };
     try {
         const response = await fetch(url, options);
-        const data = response.json();
-        return data;
+        return response.json();
     } catch (error) {
-        console.error(error);
+        throw error;
     }
 
 }
@@ -54,10 +51,9 @@ export async function updateBuild(build) {
     };
     try {
         const response = await fetch(url, options);
-        const data = await response.json();
-        return data;
-    } catch (error){
-        console.error(error);
+        return await response.json();
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -68,7 +64,7 @@ export async function listBuilds(params) {
     );
 }
 
-export async function deleteBuild(buildId){
+export async function deleteBuild(buildId) {
     const url = `${baseUrl}/builds/${buildId}`;
     const options = {
         method: 'DELETE',
@@ -76,8 +72,8 @@ export async function deleteBuild(buildId){
     };
     try {
         return await fetch(url, options);
-    } catch (error){
-        console.error(error);
+    } catch (error) {
+        throw error;
     }
 }
 
