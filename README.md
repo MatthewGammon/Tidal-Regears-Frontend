@@ -3,6 +3,14 @@ React Frontend for the Tidal Regear Management System
 <br>
 [Deployed App](https://tidal-regears-frontend.vercel.app)
 
+You may view the app in two different ways:
+1. As a regular user (guild member) with limited permissions.
+2. As an admin with the ability to create new builds and approve/reject requests.
+
+To log in as an admin, use the following credentials:
+Username: Cynical
+Password: Test
+
 ## Project Goals
 The number one goal with this project was to eliminate the manual entry of code and management of documents that go into managing a guild's regear system.
 I set out to create a smooth and seamless application that works in conjuction with the Albion Player Info application ([repo here](https://github.com/MatthewGammon/Albion-Player-Info), [Live application](https://albion-player-info.vercel.app/home))
