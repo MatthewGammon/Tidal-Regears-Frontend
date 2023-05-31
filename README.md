@@ -8,8 +8,10 @@ You may view the app in two different ways:
 2. As an admin with the ability to create new builds and approve/reject requests.
 
 To log in as an admin, use the following credentials:
-Username: Cynical
-Password: Test
+<br>
+**Username: Cynical**
+<br>
+**Password: Test**
 
 ## Project Goals
 The number one goal with this project was to eliminate the manual entry of code and management of documents that go into managing a guild's regear system.
